@@ -1,0 +1,159 @@
+\documentclass{Other/ucbthesis}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
+% To compile this file, run "latex thesis", then "biber thesis"
+% (or "bibtex thesis", if the output from latex asks for that instead),
+% and then "latex thesis" (without the quotes in each case).
+
+% Double spacing, if you want it.  Do not use for the final copy.
+% \def\dsp{\def\baselinestretch{2.0}\large\normalsize}
+% \dsp
+
+% If the Grad. Division insists that the first paragraph of a section
+% be indented (like the others), then include this line:
+% \usepackage{indentfirst}
+
+% Custom packages
+\usepackage{subfig}
+\usepackage{graphicx}
+%\usepackage{caption}
+\usepackage[utf8]{inputenc}
+%\usepackage{enumitem}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage[hang,flushmargin,splitrule]{footmisc}
+\interfootnotelinepenalty=10000
+\usepackage[colorlinks=True]{hyperref}
+
+% Custom commands
+\newcommand{\dd}[0]{\mathrm{d}}
+\newcommand{\important}[1]{\textbf{\textit{#1}}}
+\newcommand{\ct}[1]{{\textcolor{Sepia}{\texttt{#1}}}}
+\newcommand{\appropto}{\mathrel{\vcenter{
+  \offinterlineskip\halign{\hfil$##$\cr
+    \propto\cr\noalign{\kern2pt}\sim\cr\noalign{\kern-2pt}}}}}
+
+% List spacing
+\usepackage{enumitem}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{itemsep=0mm}
+
+% Custom formatting
+\hyphenation{mar-gin-al-ia}
+\hyphenation{bra-va-do}
+
+% Bibliography
+%\addbibresource{Other/charlie_zotero.bib}
+
+\begin{document}
+
+% Declarations for Front Matter
+
+\title{Sensitivity simulations and half-wave plate polarization modulators for cosmic microwave background experiments}
+\author{Charles Alexander Hill}
+\degreesemester{August}
+\degreeyear{2020}
+\degree{Doctor of Philosophy}
+\chair{Professor Adrian Lee}
+\othermembers{
+Professor Willian Holzapfel \\
+Professor Uros Seljak \\
+Professor Aaron Parsons \\
+Professor Akito Kusaka}
+\numberofmembers{5}
+\field{Physics}
+% Designated Emphasis -- this is optional, and rare
+% \emphasis{Colloidal Telemetry}
+% This is optional, and rare
+% \jointinstitution{University of Western Maryland}
+% This is optional
+\campus{Berkeley}
+
+\maketitle
+% Delete (or comment out) the \approvalpage line for the final version.
+\approvalpage
+\copyrightpage
+
+\include{Other/abstract.tex}
+
+\begin{frontmatter}
+
+\begin{dedication}
+\null\vfil
+\begin{center}
+Dedicated to...probably someone.
+\end{center}
+\vfil\null
+\end{dedication}
+
+% You can delete the \clearpage lines if you don't want these to start on
+% separate pages.
+
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+
+\input{Other/acknowledgements.tex}
+
+\end{frontmatter}
+
+\pagestyle{headings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\part{Context}
+
+\input{Introduction/Introduction}
+\input{ScientificMotivation/ScientificMotivation}
+\input{InstrumentOverview/InstrumentOverview}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\part{Noise modeling}
+
+\input{SensitivityCalculation/sensitivityCalculation.tex}
+\input{WhiteNoiseCorrelations/whiteNoiseCorrelations.tex}
+\input{BoloCalc/BoloCalc.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\part{Half-wave plates}
+
+\input{PolarizationModulation/polarizationModulation.tex}
+\input{PB2aWHWP/pb2aWhwp.tex}
+\input{CHWPDesign/chwpDesign.tex}
+\input{CHWPEvaluation/chwpEvaluation.tex}
+\input{ARCoating/arCoating.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Conclusion/conclusion.tex}
+
+\appendix
+
+%\bibliography{references}
+\printbibliography
+
+\end{document}

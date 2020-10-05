@@ -1,0 +1,143 @@
+The propagation of optical power from the sky to the focal plane is repreented by a one-dimensional chain
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sensitivity calculation}
+
+In this chapter, we discuss how the quality of the instrument can be quantified, and we explicitly present how the sensitivity of the instrument is calculated. When estimating NETs, the sensitivity calculation is typically broken into three categories: photon noise, bolometer thermal noise, and electrical noise.
+
+Another useful parameter when assessing instrument performance is the telescope temperature, which is defined as the Rayleigh-Jeans temperature of an object with emissivity 1 emitting into a 0 K instrument to reproduce the total power seen by the detector due to instrument emission. The total power due to emission from the instrument is a subset of Equation \ref{eq:popt} and is defined as
+
+where $N_{\mathrm{inst}}$ are elements within the telescope (excluding the sky elements). The telescope temperature is defined to be
+\begin{equation}
+    T_{\mathrm{tel}} = \frac{P_{inst}}{k_{\mathrm{B}} \eta_{\mathrm{inst}}}
+    \label{eq:tel_temp}
+\end{equation}
+where $\eta_{\mathrm{inst}}$ is the throughput defined in Equation \ref{eq:throughput}. Note that the temperature units are $\mathrm{K_{RJ}}$.
+
+In a similar manner to the telescope temperature, we can define the sky temperature, which is simply the Rayleigh-Jeans temperature of the detected sky power. Total power due to emission from the sky is a subset of Equation \ref{eq:popt} and is defined as
+
+where $N_{\mathrm{sky}}$ are elements outside of the telescope, which are explicitly
+\medskip
+\begin{itemize}
+    \item CMB
+    \item Galactic dust (if foregrounds are enabled)
+    \item Galactic synchrotron (if foregrounds are enabled)
+    \item Atmosphere (if the \textbf{Site} parameter is not ``Space'')
+    \item Room (if the \textbf{Site} parameter is ``Room'')
+\end{itemize}
+\medskip
+The sky temperature is defined to be
+
+\begin{equation}
+    T_{\mathrm{sky}} = \frac{P_{sky}}{k_{\mathrm{B}} \eta_{\mathrm{inst}}}
+    \label{eq:sky_temp}
+\end{equation}
+
+\noindent
+where $\eta_{\mathrm{inst}}$ is the throughput defined in Equation \ref{eq:throughput}. Note that the temperature units are $\mathrm{K_{RJ}}$.
+
+In order to derive a relation for the expected fluctuations in photon count with a given electromagnetic mode, we can decompose the coherent state into the \important{Fock basis}, or the basis of constant photon count, as
+\begin{equation}
+    \left| \alpha \right> = \sum_{n = 0}^{\infty} \frac{\alpha^{n}}{\sqrt{n !}} e^{\alpha^{2} / 2} \left| n \right> \, ,
+\end{equation}
+where $\alpha$ is the coherent state amplitude, and where $| n >$ is the Fock state. To calculate the probability of measuring $n$ photons in a given coherent state, we project $| \alpha >$ onto the Fock state $| n >$
+\begin{equation}
+    P_{n} \equiv \left< \alpha | n \right> = \frac{\left| \alpha \right|^{2 n}}{n !} e^{- \left| \alpha \right|^{2}} \, ,
+    \label{eq:photon_count_probablity_distribution}
+\end{equation}
+
+Photon noise arises due to fluctuations in the arrival times of photons at the bolometer input and therefore is a fully quantum effect. 
+
+Armed with a form for the photon-count varaince, we move to calculate the NEP due to photon fluctuations. The power in a given mode is related to the mean photon count via
+\begin{equation}
+    S(T, \nu) = A \Omega \frac{h \nu^{3}}{c^{2}} n(T, \nu) \, ,
+    \label{eq:relation_photon_occupation_power}
+\end{equation}
+where the $A \Omega$ is the mode throughput and is, for a diffraction-limited optical system, given by
+\begin{equation}
+    A \Omega = \left( \frac{c}{\nu} \right)^{2} = \lambda^{2} \, .
+    \label{eq:single_mode_throughput_etendue}
+\end{equation}
+
+Along similar vein as the discussion following Equation~\ref{eq:photon_count_fluctuations}, are two contributions to $NEP_{\mathrm{ph}}$. The first term represents shot noise $NEP_{\mathrm{shot}}$, which dominates when the photon occupation number $\ll$ 1 (e.g. optical wavelengths) and is $\propto \sqrt{P_{\mathrm{opt}}}$. The second term represents wave noise $NEP_{\mathrm{wave}}$, which dominates when the photon occupation number is $\gg$ 1 (e.g. radio wavelengths) and is $\propto P_{\mathrm{opt}}$. For ground-based experiments, the photon occupation number at $\sim$100 GHz is $\sim$1, and therefore a careful handling of both terms is necessary for an accurate NET estimate.
+
+In this section, we calculate the These photon-count statistics are converted to power statistics via the Planck power spectral density (in units of W / Hz) 
+\begin{equation}
+    S(T, \nu) = A \Omega \frac{h \nu^{3}}{c^{2}} n(T, \nu) \, ,
+    \label{eq:planck_spectral_density}
+\end{equation}
+where $A \Omega$ is the the entendue (in units of $\mathrm{m^{2} sr}$). Therefore, 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Optical power}
+\label{sec:sensitivity_optical_power_detail}
+
+Under the assumption that each optic is an isothermal blackbody, the power spectral density $p_{i}(\nu)$ for optical element $i$ is determined by its physical temperature $T_{i}$, the aggregate transmissivity of all optics between it and the detector $\left[ \eta_{i+1} (\nu) , \ldots , \eta_{N_{\mathrm{elem}}} (\nu) \right]$, its emissivity $\epsilon_{i} (\nu)$, its spillover fraction $\beta_{i} (\nu)$, the effective temperature of the spillover radiation $T_{\beta ; i}$, its scattering fraction $\delta_{i} (\nu)$, and the effective temperature of the scattered radiation $T_{\delta ; i}$
+\begin{align}
+    p_{i} \left( T_{i}, \left[ \eta_{i+1} (\nu) , \ldots , \eta_{N_{\mathrm{elem}}} (\nu) \right], \epsilon_{i}(\nu), \beta_{i}(\nu), T_{\beta ; i}, \delta_{i} (\nu), T_{\delta ; i} \right) = \\
+    \prod_{j = i + 1}^{N_{\mathrm{elem}}} \eta_{j} (\nu) \left[ \epsilon_{i} (\nu) S(T_{i}, \nu) + \beta_{i}(\nu) S(T_{\beta;i}, \nu) + \delta_{i}(\nu) S(T_{\delta; i}, \nu) \right] \, .
+    \label{eq:pow_spec_density}
+\end{align}
+The power spectral density function $S(T, \nu)$ of the emitted and scattered power from each element is given by the Planck spectral density \footnote{BoloCalc can be expanded to incorporate non-thermal spectral densities upon request} for a polarimeter
+\begin{equation}
+    S(T, \nu) = A \Omega \frac{h \nu^{3}}{c^{2}} \frac{1}{\exp \left[ \frac{h \nu}{k_{\mathrm{B}} T} - 1 \right]} = \frac{h \nu}{\exp \left[ \frac{h \nu}{k_{\mathrm{B}} T} - 1 \right]} \, ,
+    \label{eq:planck_spec}
+\end{equation}
+where for a diffraction-limited, single-moded detector, the etendue $A \Omega$ is given by the square of the detected wavelength
+\begin{equation}
+    A \Omega = \left( \frac{c}{\nu} \right)^{2} = \lambda^{2} \, .
+    \label{eq:aomega}
+\end{equation}
+
+Given the spectrum for each optical element, the power deposited on the detectors is an integral over the summation of each optical element's power spectral density 
+\begin{equation}
+    P_{\mathrm{opt}} = \int_{0}^{\infty} \left[ \sum_{i=1}^{N_{\mathrm{elem}}} p_{i}(\nu) \right] B(\nu) \mathrm{d} \nu \, ,
+    \label{eq:popt}
+\end{equation}
+where $\nu$ is microwave frequency, $p_{i}(\nu)$ is the power spectral density of optical element $i$ at the detector input, the summation contains all $N_{\mathrm{elem}}$ optical elements including the sky, telescope, and camera, and $B(\nu)$ is the detector transmissivity vs. frequency, also called the \important{detector band}
+
+. Treating the bolometer as a monolithic, macroscopic entity, thermal fluctuations in the bolometer are given by 
+\begin{equation}
+    \left< \Delta E^{2} \right> = k_{\mathrm{B}} T_{\mathrm{c}}^{2} C \, ,
+    \label{eq:bolometer_energy_fluctuations}
+\end{equation}
+where $T_{\mathrm{c}}$ is the bolometer's operating temperature (which for TESs is essentially equivalent to its critical temperature) and $C$ is its heat capacity. 
+
+BoloCalc also has an option to define the readout noise as a fraction of all other quadrature-summed noise sources $NEP_{\mathrm{other}}$ as
+\begin{equation}
+    NEP_{\mathrm{read}} = \Delta_{\mathrm{read}} \times NEP_{\mathrm{other}}
+    \label{eq:nep_read_frac}
+\end{equation}
+See Section \ref{sec:channels_txt} for more details about setting channel noise parameters.
+
+The bias voltage is determined from the bolometer resistance $R_{\mathrm{bolo}}$ and the bias power $P_{\mathrm{elec}}$ as
+\begin{equation}
+    V_{\mathrm{elec}} = \sqrt{R_{\mathrm{bolo}} P_{\mathrm{elec}}} \; ,
+    \label{eq:v_elec}
+\end{equation}
+and furthermore, the bias power $P_{\mathrm{elec}}$ is determined from the bolometer saturation power $P_{\mathrm{sat}}$ and the absorbed optical power $P_{\mathrm{opt}}$ as
+\begin{equation}
+    P_{\mathrm{elec}} = P_{\mathrm{sat}} - P_{\mathrm{opt}}
+    \label{eq:p_elec}
+\end{equation}
+
+Finally, $NEP_{\mathrm{read}}$ can be written in terms of the bolometer responsivity, bolometer resistance, and optical power as
+
+Note that a decreased bolometer responsivity factor $S_{\mathrm{fact}}$ leads to increased readout noise.
+
+BoloCalc allows the user to set the parameter $S_{\mathrm{fact}}$ explicitly, but one common starting assumption is that in the limit of high loop gain $\mathcal{L} \gg 1$ and at frequencies much slower than the bolometer time constant $\omega \tau \ll 1$, a simple approximate relationship for the responsivity is
+\begin{equation}
+    S_{\mathrm{I}} \approx -\tilde{S}_{\mathrm{fact}} \frac{1}{V_{\mathrm{elec}}}
+    \label{eq:approx_responsivity_2}
+\end{equation}
+or, equivalently
+\begin{equation}
+    S_{\mathrm{fact}} \approx \tilde{S}_{\mathrm{fact}}
+    \label{eq:responsivity_fact_approx}
+\end{equation}
+where common-use cases for $\tilde{S}_{\mathrm{fact}}$ are given in Equation \ref{eq:readout_responsivity}.

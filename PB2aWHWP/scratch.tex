@@ -1,0 +1,50 @@
+We can use the mathematical machinery used to describe AHWPs in Chapter~\ref{ch:hwp_polarization_modulation} and that used to describe instrument sensitivity in Chapter~\ref{ch:cmb_instrument_sensitivity} to assess the requirements of the PB-2a WHWP. The requirements can be broken broadly into two categories: optical, or those regarding the sapphire and anti-reflection (AR) coatings, and mechanical, or those regarding the rotation mechanism. The optical requirements include
+\begin{enumerate}
+    \item \important{Broadband modulation efficiency.} The input linear polarization fraction $P_{\mathrm{in}}$ must be preserved to a high degree over PB-2a's 90 and 150~GHz observation bands.
+    \item \important{Low emissivity.} Because the WHWP operates at ambient temperature, it stands to emit substantial in-band power if its dielectric loss is not very small.
+    \item \important{Low reflectivity.} Small reflection loss is always important for maintaining high throughput to CMB photons, but it is especially important for the WHWP, whose location outside the cryostat makes it more likely to reflect or scatter photons to hot surfaces.
+\end{enumerate}
+The impact of modulation efficiency, emissivity, and reflectivity losses on PB-2a mapping speed are shown in Figure~blah, and the resulting numerical requirements are shown in Table~blah. When evaluated on a percent basis, emissivity is by far and away the largest offender, and therefore the WHWP optical design centers around using low-loss dielectric materials, even at the expense of other performance metrics or of system simplicity. 
+
+In addition to these optical requirements, the WHWP must meet several mechanical requirements, including
+\begin{enumerate}
+    \item \important{Adequate rotational velocity}. In order to up-convert the polarization signal to frequencies larger than those of 1/f atmospheric fluctuations, the HWP rotational velocity $f_{\mathrm{HWP}}$ must be large enough to make the modulation frequency $f_{\mathrm{m}}$ larger than the atmospheric 1/f knee $f_{\mathrm{knee}} \approx 2$~Hz.
+    \item \important{Angle encoding accuracy}. In order to demodulate the detector data cleanly, the HWP rotation angle $\chi(t)$ must be measured with high precision and low noise and its timestamps need to be highly synchronize to those of the detectors.
+    \item \important{Rotational stability}. If the HWP's rotational velocity is varying substantially or quickly, it can inject HWP synchronous signals (HWPSSs) into the angle encoder data which can leave systematic signatures in the demodulated detector data.
+    \item \important{Low vibration}. As described in Section blah, the HWP is mounted to the telescope boom, which also supports the receiver cryostat. Therefore, if the HWP vibrates the telescope structure too much, these vibrations can propagate through the cryostat shells and mounting structure to the focal plane, in turn degrading detector performance. For this reason, the drive mechanism and mounting scheme must be designed to minimize and dampen any vibrations in the HWP rotational assembly.
+\end{enumerate}
+These requirements drive the tolerances on each WHWP subsystem and therefore should be kept in mind as we now move to present the hardware.
+
+All of that adds up to a nice modulation band, shown in Figure blah.
+
+While this deficiency alone may be enough to deter the use of adhesive in the WHWP optical stack there are two other downsides that are also important to highlight.
+
+
+ Figure~blah shows the reflectivity vs. the air gap's dimension along the optical axis. Because the index mismatch between sapphire $n_{\mathrm{sapphire}} = 3.2$ and air $n_{\mathrm{air}} = 1$ is large, even $\sim$~10~$\mathrm{\mu m}$ air gaps cause substantial reflection. In order to 
+ 
+ \iffalse
+\begin{table}
+	\centering
+	\begin{tabu}{| c | c | c | c | c | c |}
+	\hline
+	%\multicolumn{3}{|c|}{Measured AHWP Intensity Performance} \\
+	%\hline
+	Band & Transmission & Emissivity & Mod Efficiency & Phase Diff \\
+	\hline
+	\hline
+	95 GHz & $0.959 \pm 0.014$ & $0.020 \pm 0.009$ & $0.989 \pm 0.005$ & \multirow{2}{*}{$1.3 \pm 0.1$ deg} \\
+	\cline{1-4} \cline{6-6}
+	150 GHz & $0.941 \pm 0.015$ & $0.032 \pm 0.014$ & $0.984 \pm 0.004$ &  \\
+	\hline
+	\end{tabu}
+\caption{Band-integrated values of key validation parameters across each PB2 frequency channel. We present the measured transmission and estimated emissivity using the result shown in Figure \ref{fig:hwpBandpass} and the measured modulation efficiency and differential phase using the result shown in Figure~\ref{fig:polModPlot}.  \label{table:measParams}}
+\end{table}
+\fi
+
+which was in part inspired by the E and B Experiment (EBEX), a balloon-borne telescope that successfully operated a 4~K HWP during a 20-day flight (more on this in Chapter~\ref{ch:chwp_design}).
+
+, which enable broad enough bandwidth to achieve low reflectivity across both the 90 and 150~GHz bands. The two layers 
+
+This problem is exacerbated by the WHWP being located away from an aperture stop such that different pixels illuminate different regions of the optical stack. These glue-layer non-uniformities in turn will generate signals at $4 f_{\mathrm{HWP}}$ that will drift with the HWP temperature, mimicking a sky signal and degrading 1/f noise in the demodulated detector data.
+
+The HWP emissivity at 90/150~GHz is calculated by integrating the simulated absorption of the HWP across each PB2 band. The results of the PB2 HWP emissivity estimate are presented in Table \ref{table:measParams}.
